@@ -10,8 +10,11 @@ void setup() {
 void loop() {
     // put your main code here, to run repeatedly:
     waiting_4_command();
-    if(cmd=="hello"){
+    if(cmd=="HELLO"){
       I_AM_READY();
+    }
+    if(cmd=="GIVE5"){
+      TESTING();
     }
 }
 
@@ -28,4 +31,8 @@ void waiting_4_command(){
 
 void I_AM_READY() {
      Serial.print("WireTester is ready\n"); 
+}
+
+void TESTING(){
+  Serial.print("Testing in Progress\n");
 }
