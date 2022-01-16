@@ -1,9 +1,14 @@
 String cmd;
 char num_of_cyckles;
 int num_of_cyckles_int;
+byte testBuffer[70];
 
 void setup() {
   // put your setup code here, to run once:
+  uint8_t i;
+  for(i=1;i<=70;i++){
+    pinMode(i,INPUT);
+  }
   Serial.begin(2000000);
   Serial.setTimeout(100);
   while (!Serial) {
@@ -24,7 +29,6 @@ void loop() {
 
 void waiting_4_command() {
   cmd = "";
-//  String cmdType;
   if (Serial.available()) {
     cmd = Serial.readString();
     cmd.trim();
@@ -41,5 +45,27 @@ void I_AM_READY() {
 }
 
 void TESTING() {
-  Serial.println(num_of_cyckles_int);
+  uint8_t i,j,k,pinVal;
+  Serial.println("Testing in progress");
+  Serial.println(num_of_cyckles);
+  for(i=0;i<num_of_cyckles;i++){
+    for(j=1;j<=70;j++){
+      pinMode(j,OUTPUT);
+      digitalWrite(j,HIGH);
+      for(k=1;k<=70;k++){
+        if(k!=j){
+          pinVal=digitalRead(k);
+          if(pinVal==1){
+            testBuffer[k]=1; 
+          }
+          else{
+            testBuffer[k]=0;  
+          }
+          Serial.print(testBuffer[k],',');
+        }
+      }
+      pinMode(j,INPUT);
+    }
+  }
+  Serial.print('\n');
 }
