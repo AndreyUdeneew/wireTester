@@ -1,7 +1,8 @@
 static String cmd;
 void setup() {
   // put your setup code here, to run once:
-      Serial.begin(115200);
+      Serial.begin(2000000);
+      Serial.setTimeout(100);
       while(!Serial){
         ;
       }
@@ -19,13 +20,10 @@ void loop() {
 }
 
 void waiting_4_command(){
-  byte ch;
   cmd = "";
   if(Serial.available()){
     cmd=Serial.readString();   
-    if(ch=='\n');{
       cmd.trim();
-    }
   }
 }
 
