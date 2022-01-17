@@ -61,7 +61,8 @@ void TESTING() {
           else{
             testBuffer[k]=0;  
           }
-          Serial.print(testBuffer[k],',');
+          Serial.print(testBuffer[k]);
+          Serial.print(',');
         }
       }
       pinMode(j,INPUT);
