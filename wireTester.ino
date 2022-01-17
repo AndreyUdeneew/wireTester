@@ -74,13 +74,11 @@ void TESTING() {
           }
           Serial.print(testBuffer[k]);
           Serial.print(',');
-          testBuffer[k]=0;
         }
         else {
           testBuffer[k] = 8;
           Serial.print(testBuffer[k]);
           Serial.print(',');
-          testBuffer[k]=0;
         }
       }
       digitalWrite(j, LOW);
