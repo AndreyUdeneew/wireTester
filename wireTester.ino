@@ -35,15 +35,7 @@ void waiting_4_command() {
   }
   if (cmd.substring(0, 4) == "GIVE") {
     num_of_cyckles = cmd[4];
-    //  num_of_cyckles = char(cmd.substring(5));
-    //  num_of_cyckles_str = String(num_of_cyckles);
-    //  num_of_cyckles_int = num_of_cyckles.toInt();
     num_of_cyckles_int = num_of_cyckles - '0';
-    //  num_of_cyckles_int = int(num_of_cyckles);
-    //  num_of_cyckles_int = atoi(num_of_cyckles_int);
-
-    //  num_of_cyckles_int = num_of_cyckles- '0';
-
     cmd = "GIVE";
   }
 }
@@ -53,17 +45,17 @@ void I_AM_READY() {
 }
 
 void TESTING() {
-  byte i, j, k, pinVal, n;
+  byte pinVal;
   byte testBuffer[74];
   num_of_cyckles_int = byte(num_of_cyckles_int);
   Serial.println("Testing in progress");
   Serial.print(num_of_cyckles_int, DEC);
   Serial.println();
-  for (i = 1; i <= 2; i++) {
-    for (j = 1; j <= 74; j++) {
+  for (int i = 1; i <= num_of_cyckles_int; i++) {
+    for (int j = 1; j <= 74; j++) {
       pinMode(j, OUTPUT);
       digitalWrite(j, HIGH);
-      for (k = 1; k <= 74; k++) {
+      for (int k = 1; k <= 74; k++) {
         if (k != j) {
           pinVal = digitalRead(k);
           if (pinVal == 1) {
@@ -85,7 +77,6 @@ void TESTING() {
       pinMode(j, INPUT);
     }
     Serial.println();
-    //    Serial.print(i);
   }
   Serial.print('\n');
 }
