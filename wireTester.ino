@@ -1,10 +1,11 @@
 String cmd;
+int numOFpins=74;
 int num_of_cyckles_int;
 
 void setup() {
   // put your setup code here, to run once:
   uint8_t i;
-  for (i = 1; i <= 74; i++) {
+  for (i = 1; i <= numOFpins; i++) {
     pinMode(i, INPUT);
   }
   Serial.begin(2000000);
@@ -46,16 +47,17 @@ void I_AM_READY() {
 
 void TESTING() {
   byte pinVal;
-  byte testBuffer[74];
+  byte testBuffer[numOFpins];
   num_of_cyckles_int = byte(num_of_cyckles_int);
   Serial.println("Testing in progress");
   Serial.print(num_of_cyckles_int, DEC);
   Serial.println();
   for (int i = 1; i <= num_of_cyckles_int; i++) {
-    for (int j = 1; j <= 74; j++) {
+    for (int j = 1; j <= numOFpins; j++) {
       pinMode(j, OUTPUT);
       digitalWrite(j, HIGH);
-      for (int k = 1; k <= 74; k++) {
+      delay(1);
+      for (int k = 1; k <= numOFpins; k++) {
         if (k != j) {
           pinVal = digitalRead(k);
           if (pinVal == 1) {
@@ -65,12 +67,12 @@ void TESTING() {
             testBuffer[k] = 0;
           }
           Serial.print(testBuffer[k]);
-          Serial.print(',');
+//                    Serial.print(',');
         }
         else {
           testBuffer[k] = 8;
           Serial.print(testBuffer[k]);
-          Serial.print(',');
+//                    Serial.print(',');
         }
       }
       digitalWrite(j, LOW);
