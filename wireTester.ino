@@ -53,6 +53,7 @@ void TESTING() {
   Serial.print(num_of_cyckles_int, DEC);
   Serial.println();
   for (int i = 1; i <= num_of_cyckles_int; i++) {
+    Serial.print("BOD");
     for (int j = 1; j <= numOFpins; j++) {
       pinMode(j, OUTPUT);
       digitalWrite(j, HIGH);
@@ -67,18 +68,16 @@ void TESTING() {
             testBuffer[k] = 0;
           }
           Serial.print(testBuffer[k]);
-//                    Serial.print(',');
         }
         else {
           testBuffer[k] = 8;
           Serial.print(testBuffer[k]);
-//                    Serial.print(',');
         }
       }
       digitalWrite(j, LOW);
       pinMode(j, INPUT);
     }
-    Serial.println();
+    Serial.println("EOD");
   }
   Serial.print('\n');
 }
