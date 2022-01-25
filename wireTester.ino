@@ -70,8 +70,9 @@ void TESTING() {
           Serial.print(testBuffer[k]);
         }
         else {
-          testBuffer[k] = 8;
-          Serial.print(testBuffer[k]);
+//          testBuffer[k] = 8;
+//          Serial.print(testBuffer[k]);
+            Serial.print('8');
         }
       }
       digitalWrite(j, LOW);
