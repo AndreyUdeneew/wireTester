@@ -47,7 +47,7 @@ void I_AM_READY() {
 
 void TESTING() {
   byte pinVal;
-  byte testBuffer[numOFpins];
+//  byte testBuffer[numOFpins];
   num_of_cyckles_int = byte(num_of_cyckles_int);
   Serial.println("Testing in progress");
   Serial.print(num_of_cyckles_int, DEC);
@@ -62,16 +62,13 @@ void TESTING() {
         if (k != j) {
           pinVal = digitalRead(k);
           if (pinVal == 1) {
-            testBuffer[k] = 1;
+              Serial.print('1');
           }
           else {
-            testBuffer[k] = 0;
+              Serial.print('0');
           }
-          Serial.print(testBuffer[k]);
         }
         else {
-//          testBuffer[k] = 8;
-//          Serial.print(testBuffer[k]);
             Serial.print('8');
         }
       }
