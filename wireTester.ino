@@ -25,6 +25,9 @@ void loop() {
   if (cmd == "GIVE") {
     TESTING();
   }
+    if (cmd == "SETN") {
+    SET_OF_numOFpins();
+  }
 }
 
 void waiting_4_command() {
@@ -40,10 +43,21 @@ void waiting_4_command() {
     num_of_cyckles_int = num_of_cyckles - '0';
     cmd = "GIVE";
   }
+    if (cmd.substring(0, 4) == "GIVE") {
+    num_of_cyckles = cmd[4];
+    num_of_cyckles_int = num_of_cyckles - '0';
+    cmd = "SET_OF_numOFpins";
+  }
 }
 
 void I_AM_READY() {
   Serial.print("WireTester is ready\n");
+}
+
+void SET_OF_numOFpins() {
+  numOFpins=60;
+  Serial.print("Now the number of oins is ");
+  Serial.print(numOFpins, DEC);
 }
 
 void TESTING() {
