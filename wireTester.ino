@@ -1,15 +1,17 @@
 String cmd, num_of_pins_str;
-int numOFpins;
+int numOFpins = 60;
 int num_of_cyckles_int;
-int actualPins[]={3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,60,61,62,63,64,65,66,67,68,69};
+int actualPins[]={3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,60,61,62,63,64,65,66,67,68,69};
 
 void setup() {
   // put your setup code here, to run once:
   uint8_t i;
   for (int i = 0; i < numOFpins; i++) {
+    pinMode(actualPins[i], OUTPUT);
+    digitalWrite(actualPins[i], LOW);
     pinMode(actualPins[i], INPUT);
   }
-  Serial.begin(2000000);
+  Serial.begin(115200);
   Serial.setTimeout(100);
   while (!Serial) {
     ;
@@ -81,13 +83,13 @@ void TESTING() {
   Serial.println();
   for (int i = 1; i <= num_of_cyckles_int; i++) {
     Serial.print("BOD");
-    for (int j = 1; j <= numOFpins-0; j++) {
+    for (int j = 0; j < numOFpins-0; j++) {
 //      pinMode(j, OUTPUT);
 //      digitalWrite(j, HIGH);
       pinMode(actualPins[j], OUTPUT);
       digitalWrite(actualPins[j], HIGH);
       delay(1);
-      for (int k = 1; k <= numOFpins-0; k++) {
+      for (int k = 0; k < numOFpins-0; k++) {
         if (k != j) {
 //          pinVal = digitalRead(k);
             pinVal = digitalRead(actualPins[k]);
