@@ -7,9 +7,9 @@ void setup() {
   // put your setup code here, to run once:
   uint8_t i;
   for (int i = 0; i < numOFpins; i++) {
-    pinMode(actualPins[i], OUTPUT);
-    digitalWrite(actualPins[i], LOW);
-    pinMode(actualPins[i], INPUT);
+//    pinMode(actualPins[i], OUTPUT);
+//    digitalWrite(actualPins[i], HIGH);
+    pinMode(actualPins[i], INPUT_PULLUP);
   }
   Serial.begin(115200);
   Serial.setTimeout(100);
@@ -84,16 +84,13 @@ void TESTING() {
   for (int i = 1; i <= num_of_cyckles_int; i++) {
     Serial.print("BOD");
     for (int j = 0; j < numOFpins-0; j++) {
-//      pinMode(j, OUTPUT);
-//      digitalWrite(j, HIGH);
       pinMode(actualPins[j], OUTPUT);
-      digitalWrite(actualPins[j], HIGH);
+      digitalWrite(actualPins[j], LOW);
       delay(1);
       for (int k = 0; k < numOFpins-0; k++) {
         if (k != j) {
-//          pinVal = digitalRead(k);
             pinVal = digitalRead(actualPins[k]);
-          if (pinVal == 1) {
+          if (pinVal == 0) {
               Serial.print('1');
           }
           else {
@@ -107,8 +104,8 @@ void TESTING() {
       Serial.print('\n');
 //      digitalWrite(j, LOW);
 //      pinMode(j, INPUT);
-        digitalWrite(actualPins[j], LOW);
-        pinMode(actualPins[j], INPUT);
+//        digitalWrite(actualPins[j], HIGH);
+        pinMode(actualPins[j], INPUT_PULLUP);
     }
     Serial.println("EOD");
   }
