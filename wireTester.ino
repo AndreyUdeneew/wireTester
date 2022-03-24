@@ -24,6 +24,9 @@ void loop() {
   if (cmd == "HELLO") {
     I_AM_READY();
   }
+  if (cmd == "PING") {
+    PING();
+  }
   if (cmd == "GIVE") {
     TESTING();
   }
@@ -68,6 +71,10 @@ void I_AM_READY() {
 }
 
 void SET_numOFpins() {
+  Serial.print("Now the number of pins is ");
+  Serial.println(numOFpins);
+}
+void PING() {
   Serial.print("Now the number of pins is ");
   Serial.println(numOFpins);
 }
