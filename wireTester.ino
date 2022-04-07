@@ -1,7 +1,7 @@
-String cmd, num_of_pins_str;
+String cmd, num_of_pins_str, CMDcur;
 int numOFpins = 60;
 int num_of_cyckles_int;
-int actualPins[]={3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,60,61,62,63,64,65,66,67,68,69};
+uint8_t actualPins[]={3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,60,61,62,63};
 
 void setup() {
   // put your setup code here, to run once:
@@ -21,15 +21,26 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   waiting_4_command();
+
+  if (CMDcur == "PING"){
+      PING_test();
+  }
+
+    if (cmd == "PINS"){
+      PINS_IN_USE();
+  }
+  
   if (cmd == "HELLO") {
     I_AM_READY();
   }
   if (cmd == "PING") {
-    PING();
+    PING_test();
   }
+  
   if (cmd == "GIVE") {
     TESTING();
   }
+  
     if (cmd == "SETN") {
     SET_numOFpins();
   }
@@ -74,9 +85,17 @@ void SET_numOFpins() {
   Serial.print("Now the number of pins is ");
   Serial.println(numOFpins);
 }
-void PING() {
+void PING_test() {
   Serial.print("Now the number of pins is ");
   Serial.println(numOFpins);
+}
+
+void PINS_IN_USE(){
+  for(int i = 0; i < sizeof(actualPins); i++){
+  Serial.print(actualPins[i]);
+  Serial.print(',');
+  }
+  Serial.println();
 }
 
 void TESTING() {
@@ -89,7 +108,7 @@ void TESTING() {
   Serial.print(numOFpins, DEC);
   Serial.println();
   for (int i = 1; i <= num_of_cyckles_int; i++) {
-    Serial.print("BOD");
+    Serial.println("BOD");
     for (int j = 0; j < numOFpins-0; j++) {
       pinMode(actualPins[j], OUTPUT);
       digitalWrite(actualPins[j], LOW);
