@@ -1,7 +1,7 @@
 String cmd, num_of_pins_str, CMDcur;
 int numOFpins = 60;
 int num_of_cyckles_int;
-uint8_t actualPins[]={3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,60,61,62,63};
+uint8_t actualPins[]={3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,60,61,62,63,64,65,66,67,68,69};
 
 void setup() {
   // put your setup code here, to run once:
@@ -22,7 +22,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   waiting_4_command();
 
-  if (CMDcur == "PING"){
+  while (CMDcur == "PING"){
       PING_test();
   }
 
@@ -33,9 +33,9 @@ void loop() {
   if (cmd == "HELLO") {
     I_AM_READY();
   }
-  if (cmd == "PING") {
-    PING_test();
-  }
+//  if (cmd == "PING") {
+//    PING_test();
+//  }
   
   if (cmd == "GIVE") {
     TESTING();
@@ -54,10 +54,20 @@ void waiting_4_command() {
     cmd = Serial.readString();
     cmd.trim();
   }
+
+  if (cmd.substring(0, 4) == "PING") {
+     CMDcur = "PING";
+  }
+
+    if (cmd.substring(0, 4) == "PINS") {
+     CMDcur = "PINS";
+  }
+  
   if (cmd.substring(0, 4) == "GIVE") {
     num_of_cyckles = cmd[4];
     num_of_cyckles_int = num_of_cyckles - '0';
     cmd = "GIVE";
+    CMDcur = "GIVE";
   }
     if (cmd.substring(0, 3) == "SET") {
         numOFpinsH = cmd[3] - '0';
@@ -74,6 +84,7 @@ void waiting_4_command() {
         Serial.println(numOFpinsL, DEC);
         Serial.println(numOFpins, DEC);        
     cmd = "SETN";
+    CMDcur = "SETN";
   }
 }
 
@@ -86,8 +97,40 @@ void SET_numOFpins() {
   Serial.println(numOFpins);
 }
 void PING_test() {
-  Serial.print("Now the number of pins is ");
-  Serial.println(numOFpins);
+  byte pinVal;
+  Serial.print("Ping function in progress");
+    Serial.println();
+  for (int i = 1; i <= num_of_cyckles_int; i++) {
+    Serial.println("BOD");
+    for (int j = 0; j < numOFpins-0; j++) {
+      pinMode(actualPins[j], OUTPUT);
+      digitalWrite(actualPins[j], LOW);
+      delay(1);
+      for (int k = 0; k < numOFpins-0; k++) {
+        if (k != j) {
+            pinVal = digitalRead(actualPins[k]);
+          if (pinVal == 0) {
+              Serial.print('1');
+          }
+          else {
+              Serial.print('0');
+          }
+        }
+        else {
+            Serial.print('8');
+        }
+      }
+      Serial.print('\n');
+//      digitalWrite(j, LOW);
+//      pinMode(j, INPUT);
+//        digitalWrite(actualPins[j], HIGH);
+        pinMode(actualPins[j], INPUT_PULLUP);
+    }
+    Serial.println("EOD");
+  }
+  Serial.print('\n');
+  delay(1);
+  waiting_4_command();
 }
 
 void PINS_IN_USE(){
